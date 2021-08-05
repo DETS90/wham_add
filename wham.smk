@@ -44,8 +44,8 @@ rule index_bam:
     threads: 4
     shell:
         "samtools index {input} {output} 2> {log}"
-## Clean for duplicates
 
+## Clean for duplicates
 rule remove_duplicates:
     input: "{sample}/bam/{sample}.sorted.bam"
     output:
@@ -67,6 +67,7 @@ rule index_duplicates:
     shell:
         "samtools index {input} {output} 2> {log}"
 
+# use wham to call SVs per sample
 rule_whamm:
     input:"{sample}/bam/{sample}.duplicate.bam"
     output: "{sample}/wham_out/{sample}.vcf"
